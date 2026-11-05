@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite both the article and the Zenodo dataset."
+title: "Analysis code: EEG headset comparison in multi-user collaborative VR"
+abstract: >-
+  Analysis and reproducibility code for a within-participant comparison of a
+  four-channel and a single-channel consumer EEG headset during collaborative
+  learning tasks in multi-user virtual reality, evaluated with CNN, LSTM and
+  CNN-LSTM architectures under cross-subject, within-subject and eye-state
+  control paradigms.
+type: software
+license: MIT
+authors:
+  - family-names: Purnomo
+    given-names: Fendi Aji
+    affiliation: "Universitas Sebelas Maret"
+keywords:
+  - electroencephalography
+  - consumer EEG
+  - virtual reality
+  - collaborative learning
+  - deep learning
+  - reproducibility
+repository-code: "https://github.com/USERNAME/eeg-vr-device-comparison"
+version: "1.0.0"
+date-released: "2026-11-05"
