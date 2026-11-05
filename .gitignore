@@ -1,14 +1,14 @@
-# Data tidak ikut masuk repo. Ambil dari Zenodo.
+# Data is not committed here. Get it from Zenodo.
 data/
 *.csv
 !docs/*.csv
 
-# Kunci penghubung kode anonim ke peserta. JANGAN pernah dilacak git.
+# Key linking anonymous codes to participants. NEVER let git track this.
 *KUNCI*
 *kunci_rahasia*
 key.csv
 
-# Keluaran pelatihan
+# Training output
 hasil_*/
 runs/
 *.h5
@@ -23,7 +23,7 @@ __pycache__/
 venv/
 .ipynb_checkpoints/
 
-# Editor dan sistem
+# Editors and operating systems
 .vscode/
 .idea/
 .DS_Store

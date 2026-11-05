@@ -33,12 +33,13 @@ property of the signal, not a bug in the code.
 
 ```
 code/                             analysis scripts, exactly as run
-  04_klasifikasi_cnn_lstm.py      cross-subject, four-channel headset
-  04_muse_klasifikasi.py          cross-subject, single-channel headset
-  04b_klasifikasi_within_subject.py   within-subject, four-channel
-  04b_muse_klasifikasi.py             within-subject, single-channel
-  04c_klasifikasi_task_baseline.py    eye-state control, four-channel
-  04c_muse_klasifikasi.py             eye-state control, single-channel
+  04_muse_klasifikasi.py              cross-subject, four-channel
+  04_klasifikasi_cnn_lstm.py          cross-subject, single-channel
+  04b_muse_klasifikasi.py             within-subject, four-channel
+  04b_klasifikasi_within_subject.py   within-subject, single-channel
+  04c_muse_klasifikasi.py             eye-state control, four-channel
+  04c_klasifikasi_task_baseline.py    eye-state control, single-channel
+  README.md                           which script is which, and what to change
 reproduce/
   reproduce_published_numbers.py  recomputes every reported number from the
                                   published CSVs and prints it next to the
@@ -47,7 +48,17 @@ docs/
   pipeline.md                     preprocessing, feature set, leakage controls
   data_access.md                  how to obtain the dataset
   known_discrepancies.md          numbers that do not yet agree, and why
+  script_headers_en.md            English translation of the six script headers
 ```
+
+## A note on language
+
+All documentation in this repository is in English. The six analysis scripts
+in `code/` carry docstrings and inline comments in Indonesian, the working
+language of the project, and are published unmodified so that the released
+code is the code that produced the reported numbers. Their headers are
+translated in `docs/script_headers_en.md`, together with a glossary of the
+Indonesian terms that appear in the code.
 
 ## Quick start: verify the reported numbers
 

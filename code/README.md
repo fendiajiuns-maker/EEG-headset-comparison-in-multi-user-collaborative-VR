@@ -1,54 +1,65 @@
-# Catatan menjalankan skrip analisis
+# Running the analysis scripts
 
-Keenam skrip di folder ini adalah skrip **sebagaimana dijalankan** saat
-penelitian, termasuk jalur Windows yang dipakai. Skripnya tidak dirapikan
-ulang, supaya kode yang diterbitkan benar-benar kode yang menghasilkan angka
-di naskah.
+The six scripts in this folder are the scripts **as they were run** during the
+study, including the Windows paths they were run with. They have not been
+tidied up, so that the published code is genuinely the code that produced the
+numbers in the manuscript.
 
-## Satu hal yang harus diubah
+The script docstrings and inline comments are in Indonesian, the working
+language of the project. English translations of all six headers are in
+`docs/script_headers_en.md`.
 
-Setiap skrip punya tetapan `BASE_DIR` di bagian atas, misalnya:
+## The one thing you must change
+
+Each script has a `BASE_DIR` constant near the top, for example:
 
 ```python
 BASE_DIR = r"D:\python vscode\venv\14_klasifikasieeg_muse_2026"
 ```
 
-Ubah nilainya ke folder yang memuat berkas rekaman per detik yang sudah
-digabung (`MASTER_GABUNGAN.csv` untuk perangkat 4 kanal, berkas padanannya
-untuk perangkat 1 kanal). Tidak ada lagi yang perlu diubah.
+Change it to the folder holding the merged per-second EEG records
+(`MASTER_GABUNGAN.csv` for the four-channel device, its counterpart for the
+single-channel device). Nothing else needs changing.
 
-Berkas rekaman per detik tidak diterbitkan. Lihat `docs/data_access.md`.
+The per-second records are not published. See `docs/data_access.md`.
 
-## Pasangan skrip
+## Script pairs
 
-| Paradigma | 4 kanal | 1 kanal |
+| Paradigm | Four-channel (Muse 2) | Single-channel |
 |---|---|---|
-| Lintas-subjek | `04_klasifikasi_cnn_lstm.py` | `04_muse_klasifikasi.py` |
-| Dalam-subjek | `04b_klasifikasi_within_subject.py` | `04b_muse_klasifikasi.py` |
-| Kontrol mata | `04c_klasifikasi_task_baseline.py` | `04c_muse_klasifikasi.py` |
+| Cross-subject | `04_muse_klasifikasi.py` | `04_klasifikasi_cnn_lstm.py` |
+| Within-subject | `04b_muse_klasifikasi.py` | `04b_klasifikasi_within_subject.py` |
+| Eye-state control | `04c_muse_klasifikasi.py` | `04c_klasifikasi_task_baseline.py` |
 
-Tiap pasangan memakai window, normalisasi, benih pembagian data, jumlah epoch,
-ukuran batch, laju belajar, bobot kelas dan callback yang **identik**. Hanya
-fungsi `build_*` yang berbeda antar arsitektur. Itulah yang membuat
-perbandingan antar arsitektur setara.
+The scripts whose names contain `muse` are the four-channel ones: they read
+`MASTER_MUSE_bersih.csv` and build features from channels TP9, AF7, AF8 and
+TP10. The others are the single-channel ones: they read
+`MASTER_EEG_bersih.csv` and use the device's own Attention and Meditation
+eSense values alongside the band powers.
 
-## Tombol di dalam skrip
+Within each pair the windowing, normalisation, split seed, epoch count, batch
+size, learning rate, class weights and callbacks are **identical**. Only the
+`build_*` functions differ between architectures. That is what makes the
+comparison across architectures a fair one.
 
-Skrip perangkat 1 kanal punya tetapan `SKENARIO`:
+## Switches inside the scripts
 
-- `"SEMUA"` — 20 daya pita empat kanal ditambah asimetri frontal
-- `"TANPA_FRONTAL"` — hanya kanal temporal TP9/TP10, untuk menguji dampak
-  cemaran EMG frontal
+The four-channel scripts carry a `SKENARIO` constant:
 
-Jalankan dua kali dengan nilai berbeda untuk membandingkan. Skrip `04c` punya
-tetapan `TARGET` dengan pilihan `"MATA"` (kontrol positif utama) dan
-`"TASK_BASELINE"`.
+- `"SEMUA"` — all 20 band powers across four channels, plus frontal asymmetry
+- `"TANPA_FRONTAL"` — temporal channels TP9 and TP10 only, to test how much
+  frontal EMG contamination contributes
 
-Tetapan `QUICK_TEST` memangkas jumlah epoch untuk uji jalan cepat. Pastikan
-nilainya `False` saat menjalankan untuk hasil sebenarnya.
+Run twice with the two values to compare. Script `04c` carries a `TARGET`
+constant with the options `"MATA"` (eyes closed versus open, the main positive
+control) and `"TASK_BASELINE"` (task versus eye baseline).
 
-## Waktu jalan
+A `QUICK_TEST` constant cuts the epoch count for a fast smoke run. Make sure
+it is `False` for a real run.
 
-Pada CPU, satu skrip lintas-subjek dengan LOSO atas 59 peserta dan tiga
-arsitektur memerlukan beberapa jam. Keluaran ditulis ke folder bertimestamp
-berisi tabel nilai per peserta, grafik analisis dan grafik Pareto.
+## Run time
+
+On CPU, one cross-subject script with leave-one-subject-out over 59
+participants and three architectures takes several hours. Output goes to a
+timestamped folder holding per-participant score tables, analysis plots and a
+Pareto plot.
