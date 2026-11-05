@@ -66,8 +66,8 @@ This needs neither a GPU nor TensorFlow nor the raw recordings. It takes a
 few seconds.
 
 ```bash
-git clone https://github.com/<username>/eeg-vr-device-comparison.git
-cd eeg-vr-device-comparison
+git clone https://github.com/fendiajiuns-maker/EEG-headset-comparison-in-multi-user-collaborative-VR.git
+cd EEG-headset-comparison-in-multi-user-collaborative-VR
 pip install pandas numpy scipy
 
 # download the dataset archive from Zenodo, unpack it, and copy its data/

@@ -20,6 +20,6 @@ keywords:
   - collaborative learning
   - deep learning
   - reproducibility
-repository-code: "https://github.com/USERNAME/eeg-vr-device-comparison"
+repository-code: "https://github.com/fendiajiuns-maker/EEG-headset-comparison-in-multi-user-collaborative-VR"
 version: "1.0.0"
 date-released: "2026-11-05"
